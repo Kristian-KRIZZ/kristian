@@ -12,8 +12,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = DB::table('customer')
-        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
-        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->select("customer.id", "cid", "customer.nama", "customer.alamat", "paket_id", "paket.nama AS paket_nama")
+        ->join('paket', 'paket.id', '=', 'customer.paket_id')
         ->get();
 
         return view('customer.index', ['data' => $customer]);
@@ -21,65 +21,65 @@ class CustomerController extends Controller
 
     public function create()
     {
-        $merk = DB::table('merk')->get();
+        $paket = DB::table('paket')->get();
        
-        return view('sparepart.create', ['merk' => $merk]);
+        return view('sparepart.create', ['paket' => $paket]);
     }
 
     public function store(Request $request)
     {
         DB::table('customer')->insert([
-            'kdbarang' => $request->kdbarang,
+            'cid' => $request->cid,
             'nama' => $request->nama,
-            'harga' => $request->harga,
-            'merk_id' => $request->merk,
+            'alamat' => $request->alamat,
+            'paket_id' => $request->paket,
         ]);
 
-        return redirect(url('/sparepart'));
+        return redirect(url('/customer'));
     }
 
     public function update(Request $request, $id)
     {
-        DB::table('sparepart')
+        DB::table('customer')
         ->where('id', $id)
         ->update([
-            'kdbarang' => $request->kdbarang,
+            'cid' => $request->cid,
             'nama' => $request->nama,
-            'harga' => $request->harga,
-            'merk_id' => $request->merk,
+            'alamat' => $request->harga,
+            'paket_id' => $request->paket,
         ]);
 
-        return redirect(url('/sparepart'));
+        return redirect(url('/customer'));
     }
 
     public function edit($id)
     {
-        $sparepart = DB::table('sparepart')
-        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
-        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
-        ->where('sparepart.id', $id)
+        $customer = DB::table('customer')
+        ->select("customer.id", "cid", "customer.nama", "customer.alamat", "paket_id", "paket.nama AS paket_nama")
+        ->join('paket', 'paket.id', '=', 'customer.paket_id')
+        ->where('cuctomer.id', $id)
         ->first();
 
-        $merk = DB::table('merk')->get();
+        $merk = DB::table('paket')->get();
 
-        return view('sparepart.edit', ['data' => $sparepart, 'id' => $id, 'merk' => $merk]);
+        return view('customer.edit', ['data' => $customer, 'id' => $id, 'paket' => $paket]);
     }
 
     public function show($id)
     {
-        $sparepart = DB::table('sparepart')
-        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
-        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
-        ->where('sparepart.id', $id)
+        $sparepart = DB::table('customer')
+        ->select("customer.id", "cid", "customer.nama", "customer.harga", "paket_id", "paket.nama AS paket_nama")
+        ->join('paket', 'paket.id', '=', 'customer.paket_id')
+        ->where('customer.id', $id)
         ->first();
 
-        $merk = DB::table('merk')->get();
+        $merk = DB::table('paket')->get();
 
-        return view('sparepart.show', ['data' => $sparepart, 'id' => $id, 'merk' => $merk]);
+        return view('customer.show', ['data' => $customer, 'id' => $id, 'paket' => $paket]);
     }
     public function destroy($id)
     {
-        DB::table('sparepart')
+        DB::table('customer')
         ->where('id', $id)
         ->delete();
 

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\banController;
+use App\Http\Controllers\PaketController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SparepartController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
