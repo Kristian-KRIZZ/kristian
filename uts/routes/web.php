@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\banController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SparepartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index']);
+
+Route::controller(CustomerController::class)->prefix("customer")->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::get('/create', 'create');
+    Route::get('/{id}', 'show');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
+    Route::get('/{id}/edit', 'edit');
+});
+
+Route::controller(PaketController::class)->prefix("paket")->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::get('/create', 'create');
+    Route::get('/{id}', 'show');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
+    Route::get('/{id}/edit', 'edit');
 });

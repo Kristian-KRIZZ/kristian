@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
         </svg>
-        <span class="fs-3 fw-bold badge bg-primary text-wrap" style="width: 15rem;">AutoMobile
+        <span class="fs-3 fw-bold badge bg-primary text-wrap" style="width: 15rem;">KRIS.NET
             
         </span>
     </a>

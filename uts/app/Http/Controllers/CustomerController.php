@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+
+class CustomerController extends Controller
+{
+
+    public function index()
+    {
+        $customer = DB::table('customer')
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
+        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->get();
+
+        return view('customer.index', ['data' => $customer]);
+    }
+
+    public function create()
+    {
+        $merk = DB::table('merk')->get();
+       
+        return view('sparepart.create', ['merk' => $merk]);
+    }
+
+    public function store(Request $request)
+    {
+        DB::table('customer')->insert([
+            'kdbarang' => $request->kdbarang,
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'merk_id' => $request->merk,
+        ]);
+
+        return redirect(url('/sparepart'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::table('sparepart')
+        ->where('id', $id)
+        ->update([
+            'kdbarang' => $request->kdbarang,
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'merk_id' => $request->merk,
+        ]);
+
+        return redirect(url('/sparepart'));
+    }
+
+    public function edit($id)
+    {
+        $sparepart = DB::table('sparepart')
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
+        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->where('sparepart.id', $id)
+        ->first();
+
+        $merk = DB::table('merk')->get();
+
+        return view('sparepart.edit', ['data' => $sparepart, 'id' => $id, 'merk' => $merk]);
+    }
+
+    public function show($id)
+    {
+        $sparepart = DB::table('sparepart')
+        ->select("sparepart.id", "kdbarang", "sparepart.nama", "sparepart.harga", "merk_id", "merk.nama AS merk_nama")
+        ->join('merk', 'merk.id', '=', 'sparepart.merk_id')
+        ->where('sparepart.id', $id)
+        ->first();
+
+        $merk = DB::table('merk')->get();
+
+        return view('sparepart.show', ['data' => $sparepart, 'id' => $id, 'merk' => $merk]);
+    }
+    public function destroy($id)
+    {
+        DB::table('sparepart')
+        ->where('id', $id)
+        ->delete();
+
+        return redirect(url('/customer'));
+    }
+}
