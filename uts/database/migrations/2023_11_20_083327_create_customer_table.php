@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('nomorHp');
+            $table->foreignId('paket_id');
+            $table->foreignId('jenis_id');
             $table->timestamps();
         });
     }

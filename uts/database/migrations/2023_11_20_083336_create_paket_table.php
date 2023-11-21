@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('kdPaket')->unique();
             $table->string('speed');
             $table->string('harga');
-            $table->foreignId('jenis_id');
             $table->timestamps();
         });
     }
