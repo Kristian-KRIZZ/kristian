@@ -8,6 +8,6 @@
 
 @section('content')
     <h2>
-        <p class="fs-1 shadow-sm p-3 mb-5 bg-body-tertiary rounded ">SELAMAT DATANG DI DATA CUSTOMER</p>
+        <p class="fs-1 shadow-sm p-3 mb-5 bg-body-tertiary rounded ">Selamat Datang Di List Pelanggan</p>
     </h2>       
 @endsection

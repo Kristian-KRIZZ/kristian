@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body{
-            background: url('https://c4.wallpaperflare.com/wallpaper/933/151/757/dodge-challenger-hellcat-car-wallpaper-preview.jpg');
+            background: url('https://wall.alphacoders.com/big.php?i=1087509');
             background-repeat: no-repeat;
             background-size: 100%;
         }

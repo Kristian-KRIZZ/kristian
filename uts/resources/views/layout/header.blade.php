@@ -13,8 +13,8 @@
         @php
             $menu = [
             ['url' => '/',               'name' => 'Home'], 
-            ['url' => 'list_customer',       'name' => 'Customer'], 
-            ['url' => 'ban',              'name' => 'Ban']];
+            ['url' => 'customer',       'name' => 'Customer'], 
+            ['url' => 'paket',              'name' => 'Paket']];
         @endphp
 
         @foreach ($menu as $m)
